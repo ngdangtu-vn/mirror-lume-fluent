@@ -30,6 +30,6 @@ test "$remote" = "$MIRROR" && exit 0
 echo $(git remote show) | grep -q "$MIRROR" || git remote add --mirror=push "$MIRROR" "$GITHUB"
 
 # update mirror after the real push 
-git push --mirror "$MIRROR"
+git push --mirror "$MIRROR" --follow-tags
 
 exit 0

@@ -1,8 +1,7 @@
 {
-    "tasks": {
-        "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable -A -",
-        "build": "deno task lume",
-        "serve": "deno task lume -s"
+    "imports": {
+        "lume/": "https://deno.land/x/lume@v1.19.3/",
+        "npm/fluent": "npm:@fluent/bundle@0.18.0"
     },
     "fmt": {
         "indentWidth": 3,
@@ -11,7 +10,11 @@
         "singleQuote": true,
     },
     "lint": {
-        "report": "pretty"
+        "report": "pretty",
+        "include": [
+            "mod.ts",
+            "demo/*.ts",
+        ],
     },
     "nodeModulesDir": false,
 }
