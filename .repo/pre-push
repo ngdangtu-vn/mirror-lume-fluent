@@ -2,9 +2,9 @@
 # 
 # This hook creates a mirror repository to Github.
 # In other words, it send a copy from Gitlab to Github.
-# Reason behind this hook may be because the only way to
-# get into deno/x is through Github. While it sounds a
-# bit monopoly and dictator, but indeed it is... 
+# Reason behind this hook is to get into deno/x since
+# the host only support Github. While it sounds a bit
+# monopoly and dictator, but... indeed it is.
 #
 # pre-push hook is called by "git push" after it has checked
 # the remote status, but before anything has been pushed.
@@ -23,9 +23,10 @@ GITHUB=git@github.com:ngdangtu-vn/mirror-lume-fluent.git
 remote="$1"
 url="$2"
 
+# if the push is mirror type, we don't run this script
 test "$remote" = "$MIRROR" && exit 0
 
-# check if github-mirror is created
+# check if $MIRROR is created
 echo $(git remote show) | grep -q "$MIRROR" || git remote add --mirror=push "$MIRROR" "$GITHUB"
 
 # update mirror after the real push 
