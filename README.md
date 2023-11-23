@@ -34,8 +34,8 @@ export default site
 >   - option description
 
 - `fluentTag` **string** ("ftl")
-  - The plugin can use any nonstandard HTML tag name as a placeholder element. Default is:
-    `<ftl></ftl>`
+  - The plugin can use any nonstandard HTML tag name as a placeholder element.
+  - Default is: `<ftl></ftl>`
 - `fallbackLanguage` **string** ("en")
   - The language to get a message if the current language doesn't have the message. Learn more in
     [Fallback Order](#fallback-order)
@@ -102,10 +102,19 @@ Fluent tag as void element `<ftl />` will end up loosing all the content below t
 replacing process. So for now, even I really want to support void element, there is nothing I can
 do.
 
+## TODO
+
+- [ ] improve demo directory
+- [ ] add testcases
+- [ ] research on usecase of `extensions` option, it was meant to support `XSLT` but I don't know
+      how far I can push.
+- [ ] collect data & usage cases on FluentBundle Isolating mode (generate invisible character)
+
 ## More...
 
 - [Example](./demo/_config.ts)
 - [References & Credit](./doc/ref-n-ncredit.md)
+- [Self Note](./doc/ref-n-ncredit.md)
 
 [FluentVariable]: https://projectfluent.org/fluent.js/bundle/types/FluentVariable.html
 [FluentFunction]: https://projectfluent.org/fluent.js/bundle/types/FluentFunction.html

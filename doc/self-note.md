@@ -1,4 +1,4 @@
-# My Self-Note
+# My Self Note
 
 To bring this plugin on Deno Third Module repo, we (which past me & future me) must put our code in
 Github. Todo so, make a mirror repo and constantly do mirror push. That's pain in the ass.
@@ -23,6 +23,17 @@ git tag -a 1.0.0-alpha -m "Very first pilot version of Lume Fluent plugin"
 ```
 
 See: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+
+### External Dependencies
+
+In short, from `marvinh.` @ Deno on Discord
+
+> import maps only work locally in the module. If you publish a library with an import map and the
+> local project where you're trying to use the published library doesn't have the same mappings it
+> will fail. For that reason modules published to the deno registry must not use the import map in
+> files they expose. We're working on a solution for that, but there is no ETA
+
+See: https://discordapp.com/channels/684898665143206084/1176985460199927919
 
 ## Version Semantic
 
