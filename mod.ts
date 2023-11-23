@@ -1,17 +1,20 @@
-import { MultiProcessor, Page, PageData, Plugin, Processor, Site } from 'lume/core.ts'
-import text_loader from 'lume/core/loaders/text.ts'
-import { merge } from 'lume/core/utils.ts'
-
-import { resolve } from 'lume/deps/path.ts'
-import { Element } from 'lume/deps/dom.ts'
-
 import {
+   Element,
    FluentBundle,
    FluentFunction,
    FluentResource,
    FluentValue,
    FluentVariable,
-} from 'npm/fluent'
+   merge,
+   MultiProcessor,
+   Page,
+   PageData,
+   Plugin,
+   Processor,
+   resolve,
+   Site,
+   text_loader,
+} from './deps.ts'
 
 export interface Options {
    /** Element HTML Tag Name like <ftl></ftl> */
@@ -39,6 +42,10 @@ export const fallback: Options = {
    extensions: ['.html'],
 }
 
+/**
+ * A plugin that enables localization for Lume Multilanguage plugin
+ * (Yes, it is an extension for plugin)
+ */
 export default function (user?: Partial<Options>): Plugin {
    const opt = merge(fallback, user) as Options
 
@@ -127,8 +134,8 @@ class FluentManager {
          const content = await this.#site.getContent(path, text_loader)
          if (!content) continue
 
-         const txt = content as unknown as string
-         this.#locales.get(locale)!.addResource(new FluentResource(txt))
+         const res = new FluentResource(content as unknown as string)
+         this.#locales.get(locale)!.addResource(res)
       }
    }
 
@@ -212,6 +219,8 @@ class FluentManager {
    }
 }
 
+type FluentMsgVar = Record<string, FluentVariable>
+
 function extract_ftl_var(el: Element): FluentMsgVar {
    const data_list: FluentMsgVar = {}
 
@@ -245,7 +254,5 @@ function new_element(tag: string, content: string, old_el: Element) {
 
    return el
 }
-
-export type FluentMsgVar = Record<string, FluentVariable>
 
 export type { FluentFunction, FluentValue, FluentVariable }
