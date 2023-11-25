@@ -104,6 +104,8 @@ do.
 
 ## TODO
 
+- [ ] improve error message on notfound (need to point out the content source?)
+- [ ] fix bug on returning notfound when fallback exists
 - [ ] improve demo directory
 - [ ] add testcases
 - [ ] research on usecase of `extensions` option, it was meant to support `XSLT` but I don't know
