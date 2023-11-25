@@ -35,12 +35,12 @@ In short, from `marvinh.` @ Deno on Discord
 
 See: https://discordapp.com/channels/684898665143206084/1176985460199927919
 
-## Version Semantic
+## Semantic Versioning
 
 Here is a convention for this plugin.
 
 ```
-major.feature.fix-stage-flag
+major.feature.patch-(stage-flag)
 ```
 
 - **major**
@@ -48,7 +48,7 @@ major.feature.fix-stage-flag
     is Lume in this case.
 - **feature**
   - If the version offer new features (can also be understand as breaking changes)
-- **fix**
+- **patch**
   - A bug fix version
 - **stage-flag** includes 3 stages (2 flags). The flags mostly used in **major** & **feature**
   version.
