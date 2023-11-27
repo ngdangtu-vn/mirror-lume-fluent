@@ -87,8 +87,7 @@ function prepare_fluent(manager: FluentManager, site: Site, opt: Options) {
 
       manager.set_current_locale(page.data.lang as string)
       page.document!.querySelectorAll(fluent_tag).forEach(
-         (placeholder, inx) =>
-            manager.replace_tag(placeholder as Element, inx, page.data.layout || 'unknown'),
+         (placeholder, inx) => manager.replace_tag(placeholder as Element, inx, page),
       )
    }
 
@@ -188,8 +187,16 @@ class FluentManager {
       return formatted_msg
    }
 
-   replace_tag(el: Element, inx: number, layout: string) {
+   #log_head(pg: Page<PageData>, holder_name: string) {
+      const src_path = pg.src.entry!.path
+      const layout = `${this.#site.options.includes}/${pg.data.layout}`
+      const locale = this.#current_locale || '??'
+      return `😱 <yellow>${holder_name}</yellow> ${layout} <dim>${locale} » ${src_path}</dim>`
+   }
+
+   replace_tag(el: Element, inx: number, pg: Page<PageData>) {
       if (!this.#current_locale) return void 0
+      const log = []
 
       const msg_id = el.getAttribute('msg')
       const fallback_msg = el.textContent
@@ -197,25 +204,23 @@ class FluentManager {
          fallback: fallback_msg,
          data: extract_ftl_var(el),
       })
-      if (!msg_id) {
-         this.#site.logger.log(
-            `Element ${el.nodeName}[${inx}] (in ${layout}) requires 'msg' attribute!`,
-         )
-      }
 
-      console.log(msg_id)
-      if (msg_id && !msg || msg === fallback_msg) {
-         const log_head = `${layout}:${this.#current_locale}[${inx}]`
-         this.#site.logger.log(
-            `${log_head} Message '${msg_id}' not found and no fallback to replace!`,
-         )
-      }
+      !msg_id && log.push(`<dim>The element requires 'msg' attribute.</dim>`)
+
+      !msg && msg === fallback_msg &&
+         log.push(`<dim>The message not found and no fallback to replace.</dim>`)
 
       const tag = el.getAttribute('tag')
       const new_el = tag ? new_element(tag, msg, el) : msg
 
-      // @WARN deno-dom doesn't support nonstandard void element atm
+      // @WARN deno-dom doesn't support nonstandard void element atm!
       el.replaceWith(new_el)
+
+      if (log.length > 0) {
+         const err_msg = [this.#log_head(pg, `${el.nodeName}[${msg_id || inx}]`), ...log]
+            .join('\n   <dim>↳</dim> ')
+         this.#site.logger.log(err_msg)
+      }
    }
 }
 
