@@ -1,5 +1,4 @@
 import {
-   Data,
    Element,
    FluentBundle,
    FluentFunction,
@@ -127,7 +126,7 @@ class FluentManager {
          const path = await this.#realpath(entry.isSymlink, [base, entry.name])
 
          if (entry.isDirectory) {
-            await this.#scan_ftl(path, regex_locale, deep_lv++)
+            await this.#scan_ftl(path, regex_locale, ++deep_lv)
             continue
          }
 
