@@ -1,5 +1,6 @@
 ---
 lang: en
+title: Hi The Whole Global!
 ---
 
 # Welcome to my website

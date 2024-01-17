@@ -4,7 +4,7 @@ import fluent from '../mod.ts'
 
 const site = lume()
 
-site.use(multilanguage())
+site.use(multilanguage({ languages: ['vi', 'en'] }))
 site.use(fluent({ includes: '_i18n' }))
 
 export default site

@@ -1,5 +1,6 @@
 ---
 lang: vi
+title: Chào Cả Quả Đất Nhé
 ---
 
 # Chào mừng các bạn ghé trang web của tôi

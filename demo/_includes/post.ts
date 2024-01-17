@@ -1,6 +1,6 @@
-import { Helper, PageData } from 'lume/core.ts'
+import { Data } from 'lume/core/file.ts'
 
-export default ({ content, title }: PageData) => /*html*/ `
+export default ({ content, title }: Data) => /*html*/ `
     <!DOCTYPE html>
     <html>
         <head>

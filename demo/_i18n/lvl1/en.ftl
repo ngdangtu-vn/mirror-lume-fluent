@@ -1,0 +1,1 @@
+same-file-name-diff-msg=I expect this to be displayed

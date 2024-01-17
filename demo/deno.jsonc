@@ -5,7 +5,7 @@
         "serve": "deno task lume -s"
     },
     "imports": {
-        "lume/": "https://deno.land/x/lume@v1.19.3/",
+        "lume/": "https://deno.land/x/lume@v2.0.3/",
         "npm/fluent": "npm:@fluent/bundle@0.18.0"
     },
 }

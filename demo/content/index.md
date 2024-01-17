@@ -1,6 +1,6 @@
 ---
 lang: [en, vi]
-layout: front.tmpl.ts
+layout: front.ts
 ---
 
 Somehow, this is frontpage
