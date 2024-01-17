@@ -1,14 +1,14 @@
 import {
+   Data,
    Element,
    FluentBundle,
    FluentFunction,
    FluentResource,
    FluentValue,
    FluentVariable,
+   log,
    merge,
-   MultiProcessor,
    Page,
-   PageData,
    Plugin,
    Processor,
    resolve,
@@ -53,15 +53,18 @@ export default function (user?: Partial<Options>): Plugin {
       const manager = new FluentManager(site, opt)
       const { prepare_translation, inline_translation } = prepare_fluent(manager, site, opt)
 
-      site.preprocessAll(opt.extensions, prepare_translation)
-      site.process(opt.extensions, inline_translation)
+      site.preprocess(opt.extensions, prepare_translation)
+      site.process(
+         opt.extensions,
+         (filtered_page_ls) => filtered_page_ls.forEach(inline_translation),
+      )
    }
 }
 
 function prepare_fluent(manager: FluentManager, site: Site, opt: Options) {
    const fluent_tag = opt.fluentTag!
 
-   const rm_duplicate_locales = (ls: string[], p: Page<PageData>) => {
+   const rm_duplicate_locales = (ls: string[], p: Page) => {
       if (!p.data.lang) return ls
       if (Array.isArray(p.data.lang)) return ls
 
@@ -69,25 +72,26 @@ function prepare_fluent(manager: FluentManager, site: Site, opt: Options) {
       return ls
    }
 
-   const prepare_translation: MultiProcessor = async (pages) => {
+   const prepare_translation: Processor = async (filtered_page_ls) => {
       const base_path = resolve(site.options.src, opt.includes || site.options.includes)
       const real_path = await Deno.lstat(base_path).then(
          (entry) => entry.isSymlink ? Deno.realPath(base_path) : base_path,
       )
-      const locale_list = pages.reduce(rm_duplicate_locales, [])
+      const locale_list = filtered_page_ls.reduce(rm_duplicate_locales, [])
       await manager.load_locale(locale_list, real_path)
    }
 
-   const inline_translation: Processor = (page) => {
-      if (!page.data.lang || Array.isArray(page.data.lang)) {
-         return void site.logger.warn(
+   const inline_translation = (filtered_page: Page) => {
+      if (!filtered_page.data.lang || Array.isArray(filtered_page.data.lang)) {
+         return void log.warn(
             'The Fluent plugin must be installed after MultiLanguage plugin!',
          )
       }
 
-      manager.set_current_locale(page.data.lang as string)
-      page.document!.querySelectorAll(fluent_tag).forEach(
-         (placeholder, inx) => manager.replace_tag(placeholder as Element, inx, page),
+      manager.set_current_locale(filtered_page.data.lang as string)
+      filtered_page.document!.querySelectorAll(fluent_tag).forEach(
+         (placeholder, inx) =>
+            manager.replace_tag(placeholder as unknown as Element, inx, filtered_page),
       )
    }
 
@@ -180,23 +184,21 @@ class FluentManager {
 
       const error_log: Error[] = []
       const formatted_msg = bundle.formatPattern(msg.value, info.data, error_log)
-      error_log.forEach((err) =>
-         this.#site.logger.warn(err.message, { name: err.name, cause: err })
-      )
+      error_log.forEach((err) => log.warn(err.message, { name: err.name, cause: err }))
 
       return formatted_msg
    }
 
-   #log_head(pg: Page<PageData>, holder_name: string) {
+   #log_head(pg: Page, holder_name: string) {
       const src_path = pg.src.entry!.path
       const layout = `${this.#site.options.includes}/${pg.data.layout}`
       const locale = this.#current_locale || '??'
       return `😱 <yellow>${holder_name}</yellow> ${layout} <dim>${locale} » ${src_path}</dim>`
    }
 
-   replace_tag(el: Element, inx: number, pg: Page<PageData>) {
+   replace_tag(el: Element, inx: number, pg: Page) {
       if (!this.#current_locale) return void 0
-      const log = []
+      const msg_ls = []
 
       const msg_id = el.getAttribute('msg')
       const fallback_msg = el.textContent
@@ -205,10 +207,10 @@ class FluentManager {
          data: extract_ftl_var(el),
       })
 
-      !msg_id && log.push(`<dim>The element requires 'msg' attribute.</dim>`)
+      !msg_id && msg_ls.push(`<dim>The element requires 'msg' attribute.</dim>`)
 
       !msg && msg === fallback_msg &&
-         log.push(`<dim>The message not found and no fallback to replace.</dim>`)
+         msg_ls.push(`<dim>The message not found and no fallback to replace.</dim>`)
 
       const tag = el.getAttribute('tag')
       const new_el = tag ? new_element(tag, msg, el) : msg
@@ -216,10 +218,10 @@ class FluentManager {
       // @WARN deno-dom doesn't support nonstandard void element atm!
       el.replaceWith(new_el)
 
-      if (log.length > 0) {
-         const err_msg = [this.#log_head(pg, `${el.nodeName}[${msg_id || inx}]`), ...log]
+      if (msg_ls.length > 0) {
+         const err_msg = [this.#log_head(pg, `${el.nodeName}[${msg_id || inx}]`), ...msg_ls]
             .join('\n   <dim>↳</dim> ')
-         this.#site.logger.log(err_msg)
+         log.error(err_msg)
       }
    }
 }
