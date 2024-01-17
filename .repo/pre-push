@@ -4,7 +4,7 @@
 # In other words, it send a copy from Gitlab to Github.
 # Reason behind this hook is to get into deno/x since
 # the host only support Github. While it sounds a bit
-# monopoly and dictator, but... indeed it is.
+# monopoly and dictator, but... indeed it is :9
 #
 # pre-push hook is called by "git push" after it has checked
 # the remote status, but before anything has been pushed.

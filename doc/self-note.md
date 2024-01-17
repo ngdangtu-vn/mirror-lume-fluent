@@ -54,7 +54,7 @@ major.feature.patch-(stage-flag)
   version.
   - `alpha` a feature without test case → mostly for show off my work
   - `beta` a feature with test case → community testing
-  - release stage means: ready to use with minimum bugs. This stage doesn't have flag.
+  - release stage means: ready to use with minimum bugs. This stage **doesn't** have flag.
 
 **Examples**:
 
@@ -63,5 +63,5 @@ major.feature.patch-(stage-flag)
 - `1.0.0-alpha1` plugin refuses to leave it mommy and definitely some new changes are made
 - `1.0.0-alpha2` the plugin creator literally has no idea what to do so please be gentle on him
 - `1.0.0-alpha3` at this stage, the dev who made this must be receiving heavily Emotional Damage
-- `1.0.0-alphaN` beyond this number and you probably... never gonna give you up♪ never gonna let you
+- `1.0.0-alphaN` beyond this number and I probably... never gonna give you up♪ never gonna let you
   down♪ never gonna run around and desert you :3
