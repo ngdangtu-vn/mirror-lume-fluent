@@ -106,8 +106,8 @@ do.
 
 - [x] improve error message on notfound (need to point out the content source?)
 - [x] fix bug on returning notfound when fallback exists
-- [ ] improve demo directory
-- [ ] add testcases
+- [x] improve demo directory
+- [x] add testcases
 - [ ] research on usecase of `extensions` option, it was meant to support `XSLT` but I don't know
       how far I can push.
 - [ ] collect data & usage cases on FluentBundle Isolating mode (generate invisible character)

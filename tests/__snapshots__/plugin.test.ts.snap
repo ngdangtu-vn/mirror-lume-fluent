@@ -1,0 +1,347 @@
+export const snapshot = {};
+
+snapshot[`Fluent 1`] = `
+{
+  formats: [
+    {
+      engines: 0,
+      ext: ".page.toml",
+      loader: [AsyncFunction: toml],
+      pageType: "page",
+    },
+    {
+      engines: 1,
+      ext: ".page.ts",
+      loader: [AsyncFunction: module],
+      pageType: "page",
+    },
+    {
+      engines: 1,
+      ext: ".page.js",
+      loader: [AsyncFunction: module],
+      pageType: "page",
+    },
+    {
+      engines: 0,
+      ext: ".page.jsonc",
+      loader: [AsyncFunction: json],
+      pageType: "page",
+    },
+    {
+      engines: 0,
+      ext: ".page.json",
+      loader: [AsyncFunction: json],
+      pageType: "page",
+    },
+    {
+      dataLoader: [AsyncFunction: json],
+      engines: 0,
+      ext: ".json",
+      loader: [AsyncFunction: json],
+    },
+    {
+      dataLoader: [AsyncFunction: json],
+      engines: 0,
+      ext: ".jsonc",
+      loader: [AsyncFunction: json],
+    },
+    {
+      engines: 1,
+      ext: ".md",
+      loader: [AsyncFunction: text],
+      pageType: "page",
+    },
+    {
+      engines: 1,
+      ext: ".markdown",
+      loader: [AsyncFunction: text],
+      pageType: "page",
+    },
+    {
+      dataLoader: [AsyncFunction: module],
+      engines: 1,
+      ext: ".js",
+      loader: [AsyncFunction: module],
+    },
+    {
+      dataLoader: [AsyncFunction: module],
+      engines: 1,
+      ext: ".ts",
+      loader: [AsyncFunction: module],
+    },
+    {
+      engines: 1,
+      ext: ".vento",
+      loader: [AsyncFunction: text],
+      pageType: "page",
+    },
+    {
+      engines: 1,
+      ext: ".vto",
+      loader: [AsyncFunction: text],
+      pageType: "page",
+    },
+    {
+      dataLoader: [AsyncFunction: toml],
+      engines: 0,
+      ext: ".toml",
+      loader: [AsyncFunction: toml],
+    },
+    {
+      dataLoader: [AsyncFunction: yaml],
+      engines: 0,
+      ext: ".yaml",
+      loader: [AsyncFunction: yaml],
+      pageType: "page",
+    },
+    {
+      dataLoader: [AsyncFunction: yaml],
+      engines: 0,
+      ext: ".yml",
+      loader: [AsyncFunction: yaml],
+      pageType: "page",
+    },
+  ],
+  src: [
+    "/",
+    "/_config.ts",
+    "/_i18n",
+    "/_i18n/en.ftl",
+    "/_i18n/front.en.ftl",
+    "/_i18n/front.vi.ftl",
+    "/_i18n/lvl1",
+    "/_i18n/lvl1/en.ftl",
+    "/_i18n/lvl1/lvl2",
+    "/_i18n/lvl1/lvl2/lvl3",
+    "/_i18n/lvl1/lvl2/lvl3/lvl4",
+    "/_i18n/lvl1/lvl2/lvl3/lvl4/en.ftl",
+    "/_i18n/lvl1/vi.ftl",
+    "/_includes",
+    "/_includes/front.ts",
+    "/_includes/post.ts",
+    "/content",
+    "/content/_data.yml",
+    "/content/chào-mừng.md",
+    "/content/index.md",
+    "/content/welcome.md",
+    "/deno.jsonc",
+  ],
+}
+`;
+
+snapshot[`Fluent 2`] = `[]`;
+
+snapshot[`Fluent 3`] = `
+[
+  {
+    content: '<!DOCTYPE html>
+<html lang="vi"><head>
+            <meta charset="UTF-8">
+            <title>Chào Cả Quả Đất Nhé</title>
+        <link rel="alternate" hreflang="vi" href="https://example.com/vi/content/chào-mừng/">
+</head>
+        <body><h1>This is a heading of Chào Cả Quả Đất Nhé</h1><h1>Chào mừng các bạn ghé trang web của tôi</h1>
+<p>Đây là trang đầu tiên được tạo ra từ <strong>Lume</strong>, công cụ tạo trang tĩnh bằng Deno.</p>
+<p>Hy vọng mọi người thích nó.</p>
+
+    
+</body></html>',
+    data: {
+      alternates: "Array(1)",
+      basename: "chào-mừng",
+      children: "<h1>Chào mừng các bạn ghé trang web của tôi</h1>
+<p>Đây là trang đầu tiên được tạo ra từ <strong>Lume</strong>, công cụ tạo trang tĩnh bằng Deno.</p>
+<p>Hy vọng mọi người thích nó.</p>
+",
+      content: "# Chào mừng các bạn ghé trang web của tôi
+
+Đây là trang đầu tiên được tạo ra từ **Lume**, công cụ tạo trang tĩnh bằng Deno.
+
+Hy vọng mọi người thích nó.
+",
+      date: [],
+      lang: "vi",
+      layout: "post.ts",
+      mergedKeys: [
+        "tags",
+        "vi",
+        "en",
+      ],
+      page: [
+        "src",
+        "data",
+      ],
+      paginate: "paginate",
+      search: [],
+      tags: "Array(0)",
+      title: "Chào Cả Quả Đất Nhé",
+      url: "/vi/content/chào-mừng/",
+    },
+    src: {
+      asset: false,
+      ext: ".md",
+      path: "/content/chào-mừng",
+      remote: undefined,
+    },
+  },
+  {
+    content: \`<!DOCTYPE html>
+<html lang="en"><head>
+            <meta charset="UTF-8">
+            <title>undefined</title>
+        <link rel="alternate" hreflang="vi" href="https://example.com/vi/content/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/content/">
+</head>
+        <body>
+            Hello Tú
+            <h1>This is a heading of front</h1>
+            Hello Tú
+            missing translation
+            <span class="no">forgetful msg key</span>
+            <span class="no">can't get it out because this message was hid too deep! Max deep is level-3</span>
+            <span class="ok">I expect this to be displayed</span>
+            
+            <p>Somehow, this is frontpage</p>
+
+        
+    
+</body></html>\`,
+    data: {
+      alternates: "Array(2)",
+      basename: "index",
+      children: "<p>Somehow, this is frontpage</p>
+",
+      content: "Somehow, this is frontpage
+",
+      date: [],
+      id: "content/index",
+      lang: "en",
+      layout: "front.ts",
+      mergedKeys: [
+        "tags",
+        "vi",
+        "en",
+      ],
+      page: [
+        "src",
+        "data",
+      ],
+      paginate: "paginate",
+      search: [],
+      tags: "Array(0)",
+      url: "/en/content/",
+    },
+    src: {
+      asset: false,
+      ext: ".md",
+      path: "/content/index",
+      remote: undefined,
+    },
+  },
+  {
+    content: \`<!DOCTYPE html>
+<html lang="vi"><head>
+            <meta charset="UTF-8">
+            <title>undefined</title>
+        <link rel="alternate" hreflang="vi" href="https://example.com/vi/content/">
+<link rel="alternate" hreflang="en" href="https://example.com/en/content/">
+</head>
+        <body>
+            Chào anh Tú
+            <h1>This is a heading of front</h1>
+            Chào bạn Tú
+            missing translation
+            <span class="no">forgetful msg key</span>
+            <span class="no">can't get it out because this message was hid too deep! Max deep is level-3</span>
+            <span class="ok">I expect this to be displayed</span>
+            Chào nhé
+            <p>Somehow, this is frontpage</p>
+
+        
+    
+</body></html>\`,
+    data: {
+      alternates: "Array(2)",
+      basename: "index",
+      children: "<p>Somehow, this is frontpage</p>
+",
+      content: "Somehow, this is frontpage
+",
+      date: [],
+      id: "content/index",
+      lang: "vi",
+      layout: "front.ts",
+      mergedKeys: [
+        "tags",
+        "vi",
+        "en",
+      ],
+      page: [
+        "src",
+        "data",
+      ],
+      paginate: "paginate",
+      search: [],
+      tags: "Array(0)",
+      url: "/vi/content/",
+    },
+    src: {
+      asset: false,
+      ext: ".md",
+      path: "/content/index",
+      remote: undefined,
+    },
+  },
+  {
+    content: '<!DOCTYPE html>
+<html lang="en"><head>
+            <meta charset="UTF-8">
+            <title>Hi The Whole Global!</title>
+        <link rel="alternate" hreflang="en" href="https://example.com/en/content/welcome/">
+</head>
+        <body><h1>This is a heading of Hi The Whole Global!</h1><h1>Welcome to my website</h1>
+<p>This is my first page using <strong>Lume,</strong> a static site generator for Deno.</p>
+<p>I hope you enjoy it.</p>
+
+    
+</body></html>',
+    data: {
+      alternates: "Array(1)",
+      basename: "welcome",
+      children: "<h1>Welcome to my website</h1>
+<p>This is my first page using <strong>Lume,</strong> a static site generator for Deno.</p>
+<p>I hope you enjoy it.</p>
+",
+      content: "# Welcome to my website
+
+This is my first page using **Lume,** a static site generator for Deno.
+
+I hope you enjoy it.
+",
+      date: [],
+      lang: "en",
+      layout: "post.ts",
+      mergedKeys: [
+        "tags",
+        "vi",
+        "en",
+      ],
+      page: [
+        "src",
+        "data",
+      ],
+      paginate: "paginate",
+      search: [],
+      tags: "Array(0)",
+      title: "Hi The Whole Global!",
+      url: "/en/content/welcome/",
+    },
+    src: {
+      asset: false,
+      ext: ".md",
+      path: "/content/welcome",
+      remote: undefined,
+    },
+  },
+]
+`;
