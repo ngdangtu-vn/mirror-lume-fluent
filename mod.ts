@@ -72,9 +72,13 @@ function prepare_fluent(manager: FluentManager, site: Site, opt: Options) {
    }
 
    const prepare_translation: Processor = async (filtered_page_ls) => {
-      const base_path = resolve(site.options.src, opt.includes || site.options.includes)
-      const real_path = await Deno.lstat(base_path).then(
-         (entry) => entry.isSymlink ? Deno.realPath(base_path) : base_path,
+      const basepath = resolve(
+         site.options.cwd,
+         site.options.src,
+         opt.includes || site.options.includes,
+      )
+      const real_path = await Deno.lstat(basepath).then(
+         (entry) => entry.isSymlink ? Deno.realPath(basepath) : basepath,
       )
       const locale_list = filtered_page_ls.reduce(rm_duplicate_locales, [])
       await manager.load_locale(locale_list, real_path)
